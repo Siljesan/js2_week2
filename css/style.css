@@ -1,0 +1,25 @@
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin: 3rem;
+}
+.card {
+  width: 200px;
+  border: solid 2px lightpink;
+  border-radius: 10px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+  margin: 1rem;
+}
+.card__img {
+  width: 100%;
+  border-radius: 10px 10px 0px 0px;
+}
+.card__text {
+  padding: 0.5rem;
+}
+.cardContainer {
+  display: flex;
+}
+.cardBtn {
+  margin: 0.5rem;
+  width: 90%;
+}
