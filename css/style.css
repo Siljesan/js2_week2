@@ -4,10 +4,11 @@ body {
 }
 .card {
   width: 200px;
-  border: solid 2px lightpink;
   border-radius: 10px;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
   margin: 1rem;
+  padding: 0.5rem;
+  background-color: white;
 }
 .card__img {
   width: 100%;
@@ -18,8 +19,30 @@ body {
 }
 .cardContainer {
   display: flex;
+  flex-wrap: wrap;
+}
+.collectionContainer {
+  background-color: peachpuff;
+  display: flex;
+  flex-wrap: wrap;
 }
 .cardBtn {
   margin: 0.5rem;
   width: 90%;
+}
+
+.common {
+  border: solid 2px grey;
+}
+
+.uncommon {
+  border: solid 2px lightgreen;
+}
+
+.rare {
+  border: solid 2px blue;
+}
+
+.legendary {
+  border: solid 2px orange;
 }

@@ -5,6 +5,7 @@ const items = [
     race: "pig",
     img: "https://i.natgeofe.com/k/0ed36c42-672a-425b-9e62-7cc946b98051/pig-fence.jpg",
     type: "vegeterian",
+    rarity: "Common",
   },
   {
     id: 2,
@@ -12,6 +13,7 @@ const items = [
     race: "man",
     img: "https://i.natgeofe.com/k/0ed36c42-672a-425b-9e62-7cc946b98051/pig-fence.jpg",
     type: "meatlover",
+    rarity: "Uncommon",
   },
 ];
 
@@ -20,7 +22,102 @@ const collection = [];
 const container = document.querySelector(".cardContainer");
 const collContainer = document.querySelector(".collectionContainer");
 
+const findIndex = (array, item) => {
+  return array
+    .map((x) => {
+      return x.id;
+    })
+    .indexOf(item.id);
+};
+
+const createCard = (item, version) => {
+  const { id, name, race, type, img, rarity } = item;
+
+  return `
+  <div class="card ${rarityClass(rarity)}">
+    <h2>${name}</h2>
+    <p>${race}</p>
+    <p>${type}</p>
+    <button class="cardBtn" id="${id}-${version}">Hello</button>
+    </div>
+  `;
+};
+
+const checkObj = (obj, arr) => {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === obj) {
+      return true;
+    }
+  }
+  return false;
+
+  /*arr.forEach((element) => {
+    if (element === obj) {
+      return true;
+    }
+    return false;
+  });*/
+};
+
+const rarityClass = (rarity) => {
+  switch (rarity) {
+    case "Common":
+      return "common";
+    case "Uncommon":
+      return "uncommon";
+    case "Rare":
+      return "rare";
+    case "Legendary":
+      return "legendary";
+  }
+};
+
 const renderCollection = () => {
+  collContainer.innerHTML = "";
+  collection.forEach((item) => {
+    collContainer.innerHTML += createCard(item, "remove");
+  });
+  removeListener();
+};
+
+const addListener = () => {
+  items.forEach((item) => {
+    document.getElementById(`${item.id}-add`).addEventListener("click", () => {
+      if (checkObj(item, collection)) {
+        return;
+      } else {
+        collection.push(items[findIndex(items, item)]);
+        renderCollection();
+      }
+    });
+  });
+};
+
+const removeListener = () => {
+  collection.forEach((item) => {
+    document
+      .getElementById(`${item.id}-remove`)
+      .addEventListener("click", () => {
+        findIndex(collection, item);
+        collection.splice(findIndex(collection, item), 1);
+
+        console.log(collection);
+        renderCollection();
+      });
+  });
+};
+
+const renderCard = () => {
+  container.innerHTML = "";
+  items.forEach((item) => {
+    container.innerHTML += createCard(item, "add");
+  });
+  addListener();
+};
+
+renderCard();
+
+/*const renderCollection = () => {
   collContainer.innerHTML = "";
 
   collection.forEach((element) => {
@@ -56,14 +153,4 @@ items.forEach((element) => {
     ${btn}
     </div>`;
 });
-appendListeners();
-
-const renderCard = (item) => {
-  const { name, race, type, img } = item;
-  const btn = `<button type="button" id="${name}" class="cardBtn">Add me</button>`;
-  const hName = `<h2>${name}</h2>`;
-  const hRace = `<h3>${race}</h3>`;
-  const hType = `<h3>${type}</h3>`;
-};
-
-renderCard(items[1]);
+appendListeners();*/
